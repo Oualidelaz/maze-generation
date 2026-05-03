@@ -1,9 +1,9 @@
 import random
-from .get_direction import get_direction
+from get_direction import get_direction
 
-def dfs(self, matrix):
+def dfs(matrix, entry, height, width):
     stack = []
-    entry_x, entry_y = self.entry
+    entry_x, entry_y = entry[0], entry[1]
     n_cell = matrix[entry_y][entry_x]
     n_cell.visited = True
     stack.append(n_cell)
@@ -14,12 +14,12 @@ def dfs(self, matrix):
         valid_neighbors = []
         neighbors = {
             'top': (x, y - 1),
-            'down': (x, y + 1),
+            'bottom': (x, y + 1),
             'left': (x - 1, y),
             'right': (x + 1, y),
         }
         for nx, ny in neighbors.values():
-            if 0 <= nx < self.width and 0 <= ny < self.height: 
+            if 0 <= nx < width and 0 <= ny < height: 
                 cell = matrix[ny][nx]
                 if not cell.visited:
                     valid_neighbors.append(cell)
