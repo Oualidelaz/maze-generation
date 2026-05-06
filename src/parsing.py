@@ -7,8 +7,8 @@ END = "\033[0m"
 
 
 def parser(key, value):
+    data = dict()
     if key.lower() == "height" or key.lower() == "width":
-
         try:
             num = int(value)
         except ValueError:
@@ -18,6 +18,7 @@ def parser(key, value):
             raise ValueError(f"{key.capitalize()} cannot be negative, got {num}.")
         if num >= 500:
             raise ValueError(f"{key.capitalize()}: {num} is too large!")
+            
         return {key.upper(): num}
 
 
@@ -46,11 +47,19 @@ def parser(key, value):
             raise ValueError(f"Invalid coordinates: x='{x}' and y='{y}' must both be integers.")
         return {key.upper(): (x, y)}
         
+    if key.lower() == "perfect":
+        if isinstance(value, bool):
+            return {key.upper(): value}
+        elif isinstance(value, str):
+            if value.lower() == "true" or value.lower() == "false":
+                return {key.upper(): value.capitalize()}
+            else:
+                raise ValueError(f"Invalid value '{value}' for '{key}'. Expected 'True' or 'False'.")
+        else:
+            raise TypeError(f"Invalid type '{type(value).__name__}' for '{key}'. Expected a boolean.")
 
-    raise ValueError(f"Unknown key: '{key}'.")
-
-
-
+    else:
+        raise ValueError(f"Unknown key: {key}")
 def parsing():
     try:
         if len(sys.argv) == 2:
@@ -60,27 +69,28 @@ def parsing():
             if os.path.isfile(file_path) and FILE.endswith('.txt'):
                 try:
                     with open(file_path, "r") as file:
-                        for line in file:
-                            stripped = line.strip()
-                            if not stripped or stripped.startswith("#"):
+                        lines = file.readlines()
+                        for line in lines:
+                            line = line.strip() 
+                            if not line or line.startswith("#") or line == "":
                                 continue
-                            ln = line.split('#', 1)[0].strip()
-                            clean_line = ""
-                            for character in ln:
-                                if character in (" ", "\t", "\v"):
-                                    continue
-                                clean_line += character
-                            if '=' not in clean_line:
-                                raise ValueError(f"{RED}Invalid format: expected 'key=value'{END}")
-                            data = clean_line.split('=')
-
-                            try:
-                                key, value = data[0], data[1]
-                                print(key, value)
-                                if parser(key, value):
-                                    result.update({key, value})
-                            except Exception:
-                                raise ValueError("config must contain key and value")
+                            else:
+                                ln = line.split('#', 1)[0].strip()
+                                clean_line = ""
+                                for character in ln:
+                                    if character in (" ", "\t", "\v"):
+                                        continue
+                                    clean_line += character
+                                if '=' not in clean_line:
+                                    raise ValueError(f"{RED}Invalid format: expected 'key=value'{END}")
+                                data = clean_line.split('=')
+                                try:
+                                    key, value = data[0], data[1]
+                                    item = parser(key, value)
+                                    if item:
+                                        result.update(item)
+                                except Exception as e:
+                                    raise ValueError(e)
                         return result
                 except ValueError as e:
                     print(e)
@@ -92,7 +102,7 @@ def parsing():
                 print(f"{RED}File not found or not a valid file: '{file_path}'{END}")
                 sys.exit(1)
         else:
-            print(f"{RED}Usage Example: <maze.py> <config.txt>{END}")
+            print(f"{RED}Usage Example: <maze.py config.txt>{END}")
             sys.exit(1)
 
     except Exception as e:
