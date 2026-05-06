@@ -6,5 +6,3 @@ def generate_matrix(height, width):
         return matrix
     except Exception:
         raise ValueError("Matrix generating Error!")
-
-
