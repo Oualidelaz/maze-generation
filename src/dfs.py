@@ -4,6 +4,8 @@ from get_direction import get_direction
 def dfs(matrix, entry, height, width):
     stack = []
     entry_x, entry_y = entry[0], entry[1]
+    if not (0 <= entry_x < width and 0 <= entry_y < height):
+        raise ValueError("Entry is out of bounds")
     n_cell = matrix[entry_y][entry_x]
     n_cell.visited = True
     stack.append(n_cell)
