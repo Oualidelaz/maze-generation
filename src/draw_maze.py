@@ -3,10 +3,13 @@ GREEN = "\033[0;32m"
 BROWN = "\033[0;33m"
 BLUE = "\033[0;34m"
 PURPLE = "\033[0;35m"
+YELLOW = "\033[1;33m"
+CYAN = "\033[0;36m"
+LIGHT_GRAY = "\033[0;37m"
 END = "\033[0m"
 
 
-def draw_maze(matrix, start, end):
+def draw_maze(matrix, start, end, color):
     for row in matrix:
         line1 = line2 = right = left = ""
         for cell in row:
@@ -14,18 +17,45 @@ def draw_maze(matrix, start, end):
                 if sum(cell.walls.values()) == 15:
                     line1 += f"{PURPLE}█████{END}"
                 else:
-                    line1 += f"█████"
+                    if color == "CYAN":
+                        line1 += f"{CYAN}█████{END}"
+                    elif color == "BLUE":
+                        line1 += f"{BLUE}█████{END}"
+                    elif color == "YELLOW":
+                        line1 += f"{YELLOW}█████{END}"
+                    elif color == "LIGHT_GRAY":
+                        line1 += f"{LIGHT_GRAY}█████{END}"
+                    else:
+                        line1 += f"█████"
             else:
                 if sum(cell.walls.values()) == 15:
                     line1 += f"{PURPLE}█   █{END}"
                 else:
-                    line1 += "█   █"
+                    if color == "CYAN":
+                        line1 += f"{CYAN}█   █{END}"
+                    elif color == "BLUE":
+                        line1 += f"{BLUE}█   █{END}"
+                    elif color == "YELLOW":
+                        line1 += f"{YELLOW}█   █{END}"
+                    elif color == "LIGHT_GRAY":
+                        line1 += f"{LIGHT_GRAY}█   █{END}"
+                    else:
+                        line1 += "█   █"
 
             if cell.walls["right"]:
                 if sum(cell.walls.values()) == 15:
                     right = f"{PURPLE}█{END}"
                 else:
-                    right = "█"
+                    if color == "CYAN":
+                        right = f"{CYAN}█{END}"
+                    elif color == "BLUE":
+                        right = f"{BLUE}█{END}"
+                    elif color == "YELLOW":
+                        right = f"{YELLOW}█{END}"
+                    elif color == "LIGHT_GRAY":
+                        right = f"{LIGHT_GRAY}█{END}"
+                    else:
+                        right = "█"
             else:
                     right = " "
 
@@ -33,7 +63,16 @@ def draw_maze(matrix, start, end):
                 if sum(cell.walls.values()) == 15:
                     left = f"{PURPLE}█{END}"
                 else:
-                    left = f"█"
+                    if color == "CYAN":
+                        left = f"{CYAN}█{END}"
+                    elif color == "BLUE":
+                        left = f"{BLUE}█{END}"
+                    elif color == "YELLOW":
+                        left = f"{YELLOW}█{END}"
+                    elif color == "LIGHT_GRAY":
+                        left = f"{LIGHT_GRAY}█{END}"
+                    else:
+                        left = "█"
             else:
                 left = " "
 
@@ -45,5 +84,14 @@ def draw_maze(matrix, start, end):
                 line2 += f"{left}   {right}"
 
         print(line1)
-        print(line2)        
-    print("█" * 5 * len(matrix[0]))
+        print(line2)
+    if color == "CYAN":
+        print(f"{CYAN}█{END}" * 5 * len(matrix[0]))
+    elif color == "BLUE":
+        print(f"{BLUE}█{END}" * 5 * len(matrix[0]))
+    elif color == "YELLOW":
+        print(f"{YELLOW}█{END}" * 5 * len(matrix[0]))
+    elif color == "LIGHT_GRAY":
+        print(f"{LIGHT_GRAY}█{END}" * 5 * len(matrix[0]))
+    else:
+        print("█" * 5 * len(matrix[0]))
