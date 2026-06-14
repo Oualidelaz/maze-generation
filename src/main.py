@@ -49,7 +49,6 @@ def main():
     END = "\033[0m"
     try:
         colors = ["CYAN", "BLUE", "YELLOW", "LIGHT_GRAY"]
-        previous_color = "white"
         current_color = "white"
         data = parsing()
         os.system("cls") if os.name == "nt" else os.system("clear")
@@ -62,31 +61,26 @@ def main():
             except ValueError:
                 print(f"\n{RED}[!] Invalid choice!{END}")
                 time.sleep(0.5)
-
-            else:
-                if choice == 1:
-                    os.system("cls") if os.name == "nt" else os.system("clear")
-                    run(data, previous_color)
-                elif choice == 2:
-                    os.system("cls") if os.name == "nt" else os.system("clear")
-                    current_color = previous_color
-                    while current_color == previous_color:
-                        current_color = random.choice(colors)
-                    run(data, current_color)
-                    previous_color = current_color
-                elif choice == 3:
-                    os.system("cls") if os.name == "nt" else os.system("clear")
-                    run(data, current_color)
-                    # show path
-                elif choice == 0:
-                    print(f"\n{YELLOW}[*] Exiting Maze Program... Goodbye!{END}")
-                    sys.exit()
+            
+            os.system("cls") if os.name == "nt" else os.system("clear")
+            if choice == 1:
+                run(data, current_color)
+            elif choice == 2:
+                available_colors = [color for color in colors if color != current_color]
+                current_color = random.choice(available_colors)
+                run(data, current_color)
+            elif choice == 3:
+                run(data, current_color)
+                # show path
+            elif choice == 0:
+                print(f"{YELLOW}[*] Exiting Maze Program... Goodbye!{END}")
+                sys.exit()
 
 
     except KeyboardInterrupt:
-        print(f"{RED}[!] Interrupted by user. Exiting gracefully...{END}")
+        print(f"\n{RED}[!] Interrupted by user. Exiting gracefully...{END}")
         sys.exit()
     except Exception:
-        print(f"{RED}[!] Something Wrong!{END}")
+        print(f"\n{RED}[!] Something Wrong!{END}")
         sys.exit()
 main()
