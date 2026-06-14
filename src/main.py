@@ -10,21 +10,24 @@ from draw_maze import draw_maze
 from trace_u import trace_u
 
 
-def run(data, color):                
+def run(data, color, mtx=None):                
     height = data.get("HEIGHT")
     width = data.get("WIDTH")
     entry = data.get("ENTRY")
     exit = data.get("EXIT")
     perfect = data.get("PERFECT")
-    matrix = generate_matrix(height, width)
-    current_color = color
+    if mtx is not None:
+        matrix = mtx
+    else:
+        matrix = generate_matrix(height, width)
     trace_u(matrix, height, width, entry, exit)
     dfs(matrix, entry, height, width)
-    if perfect:
+    if perfect and mtx is None:
         add_loops(matrix, height, width)
     start_cell = matrix[entry[1]][entry[0]]
     exit_cell = matrix[exit[1]][exit[0]]
-    draw_maze(matrix, start_cell, exit_cell, current_color)
+    draw_maze(matrix, start_cell, exit_cell, color)
+    return matrix
 
 
 def display_menu():
@@ -51,6 +54,7 @@ def main():
         colors = ["CYAN", "BLUE", "YELLOW", "LIGHT_GRAY"]
         current_color = "white"
         data = parsing()
+        matrix = None
         os.system("cls") if os.name == "nt" else os.system("clear")
         while True:
             display_menu()
@@ -64,18 +68,20 @@ def main():
             
             os.system("cls") if os.name == "nt" else os.system("clear")
             if choice == 1:
-                run(data, current_color)
+                matrix = run(data, current_color)
             elif choice == 2:
                 available_colors = [color for color in colors if color != current_color]
                 current_color = random.choice(available_colors)
-                run(data, current_color)
+                if matrix is not None:
+                    run(data, current_color, matrix)
+                else:
+                    run(data, current_color)
             elif choice == 3:
                 run(data, current_color)
                 # show path
             elif choice == 0:
                 print(f"{YELLOW}[*] Exiting Maze Program... Goodbye!{END}")
                 sys.exit()
-
 
     except KeyboardInterrupt:
         print(f"\n{RED}[!] Interrupted by user. Exiting gracefully...{END}")
