@@ -6,10 +6,11 @@ PURPLE = "\033[0;35m"
 YELLOW = "\033[1;33m"
 CYAN = "\033[0;36m"
 LIGHT_GRAY = "\033[0;37m"
+LIGHT_RED = "\033[1;31m"
 END = "\033[0m"
 
 
-def draw_maze(matrix, start, end, color):
+def draw_maze(matrix, start, end, color, path_coordinates=None):
     for row in matrix:
         line1 = line2 = right = left = ""
         for cell in row:
@@ -80,6 +81,8 @@ def draw_maze(matrix, start, end, color):
                 line2 += f"{left}{GREEN}███{END}{right}"
             elif cell == end:
                 line2 += f"{left}{RED}███{END}{right}"
+            elif path_coordinates is not None and (cell.x, cell.y) in path_coordinates:
+                line2 += f"{left}{LIGHT_RED}███{END}{right}"
             else:
                 line2 += f"{left}   {right}"
 
