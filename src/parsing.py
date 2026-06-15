@@ -50,13 +50,14 @@ def parser(key, value):
     if key.lower() == "perfect":
         if isinstance(value, bool):
             return {key.upper(): value}
-        elif isinstance(value, str):
-            if value.lower() == "true" or value.lower() == "false":
-                return {key.upper(): value.capitalize()}
-            else:
-                raise ValueError(f"Invalid value '{value}' for '{key}'. Expected 'True' or 'False'.")
-        else:
-            raise TypeError(f"Invalid type '{type(value).__name__}' for '{key}'. Expected a boolean.")
+        if isinstance(value, str):
+            value = value.strip().lower()
+            if value == "true":
+                return {key.upper(): True}
+            elif value == "false":
+                return {key.upper(): False}
+            raise ValueError(f"Invalid value '{value}' for '{key}'. Expected 'True' or 'False'.")
+        raise TypeError(f"Invalid type '{type(value).__name__}' for '{key}'. Expected a boolean.")
 
     else:
         raise ValueError(f"Unknown key: {key}")
