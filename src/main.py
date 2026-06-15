@@ -8,9 +8,11 @@ from dfs import dfs
 from add_loops import add_loops
 from draw_maze import draw_maze
 from trace_u import trace_u
+from bfs import bfs
+from get_path_positions import get_path_positions
 
 
-def run(data, color, mtx=None):                
+def run(data, color, mtx=None, path=False):                
     height = data.get("HEIGHT")
     width = data.get("WIDTH")
     entry = data.get("ENTRY")
@@ -22,10 +24,15 @@ def run(data, color, mtx=None):
         matrix = generate_matrix(height, width)
     trace_u(matrix, height, width, entry, exit)
     dfs(matrix, entry, height, width)
-    if perfect and mtx is None:
+    if not perfect and mtx is None:
         add_loops(matrix, height, width)
     start_cell = matrix[entry[1]][entry[0]]
     exit_cell = matrix[exit[1]][exit[0]]
+    if path:
+        path = bfs(matrix, entry, exit, width, height);
+        path_coordinates = get_path_positions(path)
+        draw_maze(matrix, start_cell, exit_cell, color, path_coordinates)
+        return matrix
     draw_maze(matrix, start_cell, exit_cell, color)
     return matrix
 
@@ -65,6 +72,7 @@ def main():
             except ValueError:
                 print(f"\n{RED}[!] Invalid choice!{END}")
                 time.sleep(0.5)
+                continue
             
             os.system("cls") if os.name == "nt" else os.system("clear")
             if choice == 1:
@@ -72,13 +80,9 @@ def main():
             elif choice == 2:
                 available_colors = [color for color in colors if color != current_color]
                 current_color = random.choice(available_colors)
-                if matrix is not None:
-                    run(data, current_color, matrix)
-                else:
-                    run(data, current_color)
+                run(data, current_color, matrix)
             elif choice == 3:
-                run(data, current_color)
-                # show path
+                run(data, current_color, matrix, True)
             elif choice == 0:
                 print(f"{YELLOW}[*] Exiting Maze Program... Goodbye!{END}")
                 sys.exit()
