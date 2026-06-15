@@ -12,7 +12,7 @@ def add_loops(matrix, height, width):
                 "top": (x, y - 1),
                 "bottom": (x, y + 1),
                 "left": (x - 1, y),
-                "top": (x + 1, y)
+                "right": (x + 1, y)
             }
             valid_neighbors = []
             for nx, ny in neighbors.values():
