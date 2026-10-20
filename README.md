@@ -1,10 +1,22 @@
+<div align="center">
+
+# 🧩 Maze Generation & Pathfinding
+
+#### Generate mazes with DFS. Find the shortest path with BFS.
+
 <p align="center">
-  <img src="assets/oualidelaz_draw.gif" alt="oualidelaz" width="300"/>
+  <img src="https://img.shields.io/badge/Language-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/Generation-DFS-2563EB?style=flat-square" alt="DFS"/>
+  <img src="https://img.shields.io/badge/Pathfinding-BFS-10B981?style=flat-square" alt="BFS"/>
+  <img src="https://img.shields.io/badge/Visualization-Terminal-6D5EF5?style=flat-square" alt="Terminal visualization"/>
 </p>
 
+</div>
 
 
-<div align="center">
+## 📌 Overview
+
+A Python-based maze generation and pathfinding system that couples stochastic maze construction with classical graph-search algorithms. Depth-First Search (DFS) synthesizes the maze topology by carving passages between adjacent cells of an initially fully walled grid, while Breadth-First Search (BFS) traverses the resulting graph to compute the shortest path between the designated entry and exit points.
 
 ## 🔍 Depth-First Search (DFS)
 
@@ -18,49 +30,44 @@
   <span style="background: linear-gradient(90deg, red, cyan); 
                -webkit-background-clip: text; 
                color: transparent;">
-    The animation demonstrates how DFS dives deep into paths and backtracks when necessary.
+    The animation illustrates DFS descending greedily along a single path and backtracking upon reaching a dead end.
   </span>
 </p>
 
 
-<br>
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=38&duration=3000&pause=1000&color=7A5CFF&center=true&vCenter=true&width=700&lines=%F0%9F%A7%A0+Project+Overview" />
-</p>
-<br>
 
-This project is a Python-based maze generation and visualization system that demonstrates how graph traversal algorithms work in practice, especially Depth-First Search (DFS). The application generates a dynamic maze structure using recursive backtracking techniques, manages cell states and wall connections, and visually renders the final maze layout.
+This project is a Python-based maze generation and visualization system that demonstrates the practical application of graph traversal algorithms, with particular emphasis on Depth-First Search (DFS). The application constructs a randomized maze using recursive backtracking, maintains per-cell state and wall connectivity, and renders the resulting layout in the terminal.
 
 ### ✨ Features
 
-- 🧩 Maze generation using DFS traversal
-- 📦 Matrix and cell-based architecture
-- 🎨 Visual maze rendering system
-- 🧠 Recursive algorithm visualization
-- ⚙️ Config-driven customization
-- 🚪 Entry and exit point support
-- 🔄 Loop generation and path tracing
+- 🧩 Maze generation via DFS traversal
+- 📦 Matrix-based, cell-oriented architecture
+- 🎨 Modular maze rendering system
+- 🧠 Step-by-step visualization of the recursive algorithm
+- ⚙️ Configuration-driven customization
+- 🚪 Configurable entry and exit points
+- 🔄 Loop injection and path tracing
 - 📍 Coordinate and direction management
-- 🛡️ Strong input parsing and validation
+- 🛡️ Robust input parsing and validation
 
 ### 🏗️ Project Structure
 
-- `add_loops.py` → imperfect maze generation enhancements
-- `cell.py` → maze cell representation
-- `cell_closed.py` → predefined blocked cell patterns
-- `config.txt` → maze configuration settings
+- `add_loops.py` → imperfect maze generation (loop injection)
+- `cell.py` → maze cell data model
+- `cell_closed.py` → predefined closed-cell patterns
+- `config.txt` → maze configuration parameters
 - `dfs.py` → DFS-based maze generation algorithm
 - `draw_maze.py` → maze visualization and rendering
-- `generate_matrix.py` → matrix/grid creation
-- `get_block_position.py` → blocked area positioning utilities
-- `get_direction.py` → movement direction logic
-- `main.py` → project entry point and interactive menu system
+- `generate_matrix.py` → matrix/grid construction
+- `get_block_position.py` → blocked-region positioning utilities
+- `get_direction.py` → movement and direction resolution logic
+- `main.py` → application entry point and interactive menu system
 - `parsing.py` → configuration parsing and validation
-- `trace_u.py` → special path/block tracing logic
+- `trace_u.py` → special path and block tracing logic
 
-## 🤝 Team Contribution — Achraf Elhadjaoui
+## 🤝 Team Contribution - Achraf Elhadjaoui
 
-*Achraf Elhadjaoui* contributed to the BFS-based path processing part of the project. His work focuses on finding a valid path through the generated maze using Breadth-First Search and extracting useful path-related information for visualization and analysis.
+*Achraf Elhadjaoui* authored the BFS-based path-processing component of the project. His work centers on computing a valid route through the generated maze using Breadth-First Search, and on extracting the path-related data required for visualization and analysis:
 
 
 - `path`
@@ -72,9 +79,9 @@ This project is a Python-based maze generation and visualization system that dem
 ### 🎯 Purpose
 
 
-The goal of this project is to understand:
+This project aims to build a rigorous understanding of:
 
-- 🧠 DFS & BFS algorithms
+- 🧠 DFS and BFS algorithms
 - 🧩 Maze generation and solving
 - 🌐 Graph traversal concepts
 - 🎨 Algorithm visualization
@@ -105,11 +112,11 @@ PERFECT = TRUE
 
 #### Configuration Options
 
-- `HEIGHT` → Maze height
-- `WIDTH` → Maze width
-- `ENTRY` → Starting cell `(x,y)`
-- `EXIT` → Exit cell `(x,y)`
-- `PERFECT` → Enable or disable additional loops
+- `HEIGHT` → Number of rows in the maze grid
+- `WIDTH` → Number of columns in the maze grid
+- `ENTRY` → Entry cell coordinates `(x,y)`
+- `EXIT` → Exit cell coordinates `(x,y)`
+- `PERFECT` → Toggles loop injection (imperfect maze generation)
 
 ---
 
@@ -137,17 +144,17 @@ python main.py config.txt
 ==============================
 ```
 
-- **Draw Maze** → Generate and display a maze
-- **Change Maze Color** → Render the maze using a different color theme
-- **Show Maze Path** → Display the solution path *(coming soon)*
-- **Exit** → Close the application
+- **Draw Maze** → Generates and renders a new maze
+- **Change Maze Color** → Re-renders the maze using an alternative color theme
+- **Show Maze Path** → Displays the computed solution path *(coming soon)*
+- **Exit** → Terminates the application
 
 ---
 
 ### 📌 Requirements
 
 - Python 3.8+
-- A terminal that supports ANSI colors
+- A terminal with ANSI color support
 
 
 <div align="center">
@@ -156,13 +163,13 @@ python main.py config.txt
 
 </div>
 
-**Depth-First Search (DFS)** is an algorithm used to explore structures like graphs or grids.
+**Depth-First Search (DFS)** is a graph-traversal algorithm for exploring graphs, trees, and grid-based structures.
 
-- It starts at one point and follows a path as far as it can. When it reaches a dead end, it uses a process called backtracking to return to the last point where another path is available, and then continues exploring from there.
-- Backtracking means going back to a previous point to try a different path.
-- This process repeats until all nodes (or cells) have been visited.
+- Starting from a source node, it follows a single path as deeply as possible. Upon reaching a dead end, it backtracks to the most recent node that still has unexplored neighbors and resumes exploration from there.
+- Backtracking is the act of retreating to a previously visited state in order to pursue an alternative branch.
+- The process repeats until every node (or cell) has been visited.
 
-It is widely used in:
+It is widely applied in:
 - Graph traversal
 - Maze generation 🧩
 - Tree exploration 🌲
@@ -180,7 +187,7 @@ It is widely used in:
     <td width="180"><strong>🧠 <code>dfs()</code></strong></td>
     <td>
       <strong>Core traversal algorithm</strong><br>
-      Explores one path as deeply as possible before backtracking to continue with other branches.
+      Exhaustively explores a single branch to its full depth before backtracking to examine the remaining branches.
     </td>
   </tr>
 </table>
@@ -200,14 +207,14 @@ It is widely used in:
 <strong style="color: white;">📌 Grid Initialization</strong>
 
 <ul>
-<li>Create a 2D grid of <code>Cell</code> objects (matrix)</li>
-<li>Each cell is represented as: <code>Cell(row, col)</code></li>
+<li>Construct a 2D grid (matrix) of <code>Cell</code> objects</li>
+<li>Each cell is identified by its coordinates: <code>Cell(row, col)</code></li>
 </ul>
 
 <strong>Example:</strong>
 <ul>
 <li><code>WIDTH = 5</code>, <code>HEIGHT = 5</code></li>
-<li>Cells range from <code>Cell(0,0)</code> → <code>Cell(4,4)</code></li>
+<li>Cells span from <code>Cell(0,0)</code> → <code>Cell(4,4)</code></li>
 </ul>
 </div>
 <br>
@@ -275,7 +282,7 @@ def dfs(self, matrix):
   <span style="background: linear-gradient(90deg, red, cyan); 
                -webkit-background-clip: text; 
                color: transparent;">
-    The animation demonstrates how BFS explores level by level, expanding outward and finding the shortest path efficiently.
+    The animation illustrates BFS expanding level by level from the source, which guarantees the shortest path in an unweighted graph.
   </span>
 </p>
 
@@ -285,17 +292,17 @@ def dfs(self, matrix):
 
 </div>
 
-**Breadth-First Search (BFS)** is an algorithm used to explore structures like graphs or grids.
+**Breadth-First Search (BFS)** is a graph-traversal algorithm for exploring graphs, trees, and grid-based structures.
 
-- It starts at one point and explores all neighboring nodes first before moving deeper into the structure.
-- Instead of going deep like DFS, BFS works level by level, expanding outward like a wave 🌊.
-- It uses a queue (FIFO) to keep track of nodes to visit next.
-- This process continues until all nodes (or cells) have been visited or the target is found.
+- Starting from a source node, it visits all immediate neighbors before advancing to the next depth level.
+- In contrast to DFS, which commits to depth, BFS expands uniformly outward, much like a wave 🌊.
+- It relies on a queue (FIFO) to maintain the frontier of nodes awaiting exploration.
+- The process continues until all nodes (or cells) have been visited or the target is reached.
 
-It is widely used in:
+It is widely applied in:
 - Graph traversal
-- Shortest path finding 📏
-- Level-order traversal in trees 🌲
+- Shortest-path computation 📏
+- Level-order traversal of trees 🌲
 
 
 <div align="center">
@@ -309,7 +316,7 @@ It is widely used in:
     <td width="180"><strong>🧠 <code>bfs()</code></strong></td>
     <td>
       <strong>Core traversal algorithm</strong><br>
-      Explores all neighboring nodes first, then moves to the next level using a queue-based approach.
+      Visits all neighbors of the current node before descending to the next level, using a queue-based frontier.
     </td>
   </tr>
 </table>
